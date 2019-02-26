@@ -1,36 +1,33 @@
 import _ from 'lodash'
 
-const snakefyRegex = /\.?([A-Z]+)/g
-const camelizeRegex = /_([a-zA-Z])/g
+const snakefyFunction = (object) => {
+  return _.mapKeys(object, (value, key) => key.replace(/\.?([A-Z]+)/g, (x, y) => `_${y.toLowerCase()}`).replace(/^_/, ''))
+}
+const camelizeFunction = (object) => {
+  return _.mapKeys(object, (value, key) => key.replace(/_([a-zA-Z])/g, (x, y) => `${y.toUpperCase()}`))
+}
 
-const snakefy = (object) => {
+const convertKeys = (object, convertFunction) => {
   let convertObject = _.cloneDeep(object)
 
-  convertObject = _.mapKeys(convertObject, (value, key) => key.replace(snakefyRegex, (x, y) => `_${y.toLowerCase()}`).replace(/^_/, ''))
+  convertObject = convertFunction(convertObject)
 
   return _.mapValues(
     convertObject,
     (value) => {
-      if (_.isPlainObject(value)) return snakefy(value)
-      if (_.isArray(value)) return _.map(value, snakefy)
+      if (_.isPlainObject(value)) return convertKeys(value, convertFunction)
+      if (_.isArray(value)) return _.map(value, (item) => convertKeys(item, convertFunction))
       return value
     },
   )
 }
 
+const snakefy = (object) => {
+  return convertKeys(object, snakefyFunction)
+}
+
 const camelize = (object) => {
-  let convertObject = _.cloneDeep(object)
-
-  convertObject = _.mapKeys(convertObject, (value, key) => key.replace(camelizeRegex, (x, y) => `${y.toUpperCase()}`))
-
-  return _.mapValues(
-    convertObject,
-    (value) => {
-      if (_.isPlainObject(value)) return camelize(value)
-      if (_.isArray(value)) return _.map(value, camelize)
-      return value
-    },
-  )
+  return convertKeys(object, camelizeFunction)
 }
 
 export {
