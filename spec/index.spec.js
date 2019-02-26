@@ -1,4 +1,4 @@
-import { snakefy, camelize } from './index'
+import { snakefy, camelize } from '../src/index'
 
 const camelizedObject = {
   oneKey: 1,
