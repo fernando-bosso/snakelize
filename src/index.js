@@ -11,7 +11,7 @@ const convertKeys = (object, regex) => {
   return _.mapValues(
     convertObject,
     (value) => {
-      if (_.isPlainObject(value)) return convertKeys(value)
+      if (_.isPlainObject(value)) return convertKeys(value, regex)
       if (_.isArray(value)) return _.map(value, convertKeys)
       return value
     },
