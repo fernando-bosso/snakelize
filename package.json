@@ -13,6 +13,10 @@
   "scripts": {
     "prepublish": "yarn babel src --out-dir lib"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fernando-bosso/snakelize.git"
+  },
   "author": "Luiz Bosso <lfernando.bosso@gmail.com>",
   "license": "MIT",
   "dependencies": {
