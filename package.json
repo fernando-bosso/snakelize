@@ -1,0 +1,11 @@
+{
+  "name": "snakelize",
+  "version": "1.0.0",
+  "description": "Package to snakefy or camelize javascript object keys, useful when working with backend languages that use snakefied keys",
+  "main": "index.js",
+  "author": "Luiz Bosso <lfernando.bosso@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
