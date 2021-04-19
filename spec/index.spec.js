@@ -19,15 +19,36 @@ const snakefiedObject = {
     }
   }
 }
+
+const camelizedArrObject = {
+  oneKey: 1,
+  twoKey: [
+    "one", "two", 3
+  ]
+}
+
+const snakefiedArrObject = {
+  one_key: 1,
+  two_key: [
+    "one", "two", 3
+  ]
+}
+
 describe('Snakelize', () => {
   describe('snakefy', () => {
     it('snakefies all keys from object', () => {
       expect(snakefy(camelizedObject)).toEqual(snakefiedObject)
     })
+    it('snakefies all keys from object without deconstructing array', () => {
+      expect(snakefy(camelizedArrObject)).toEqual(snakefiedArrObject)
+    })
   })
   describe('camelize', () => {
     it('camelizes all keys from object', () => {
       expect(camelize(snakefiedObject)).toEqual(camelizedObject)
+    })
+    it('camelizes all keys from object without deconstructing array', () => {
+      expect(snakefy(camelizedArrObject)).toEqual(snakefiedArrObject)
     })
   })
 })
