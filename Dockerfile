@@ -4,4 +4,4 @@ COPY . .
 
 RUN yarn install
 
-CMD ["bash"]
+CMD ["sh"]
