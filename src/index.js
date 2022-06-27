@@ -16,7 +16,12 @@ const convertKeys = (object, convertFunction) => {
     convertObject,
     (value) => {
       if (_.isPlainObject(value)) return convertKeys(value, convertFunction)
-      if (_.isArray(value)) return _.map(value, (item) => convertKeys(item, convertFunction))
+      if (_.isArray(value)) return _.map(value, (item) => {
+        if(_.isString(item) || _.isNumber(item)){
+          return item
+        }
+        return convertKeys(item, convertFunction)
+      })
       return value
     },
   )
